@@ -145,6 +145,32 @@ class VentaService extends AService {
         }
     }
 
+    public function exportarVentasACsv() {
+        $nombreArchivo = tempnam(sys_get_temp_dir(), 'ventas_:');
+        $csv = fopen($nombreArchivo, "w");
+        
+        
+        fputcsv($csv, Venta::obtenerCabecerasCSV());
+
+        $ventas = $this->obtenerVentas();
+
+        foreach($ventas as $venta) {
+            fputcsv($csv, $venta->toCsv());
+        }
+        fclose($csv);
+        return $nombreArchivo;
+    }
+
+    public function obtenerVentas() {
+        $query = Venta::obtenerConsultaSelect() ;
+
+        $consulta = $this->accesoDatos->prepararConsulta($query);
+
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_CLASS, Venta::class);
+    }
+
     private function actualizarVenta($numeroPedido,$usuario,$nombre,$marca,$tipo,$cantidad) {
         $query = "UPDATE Venta SET usuario = :usuario, nombre = :nombre, marca = :marca, tipo = :tipo, cantidad = :cantidad WHERE numeroPedido = :numeroPedido";
         

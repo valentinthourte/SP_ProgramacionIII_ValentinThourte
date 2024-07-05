@@ -1,0 +1,543 @@
+{
+	"info": {
+		"_postman_id": "008e53a5-4b00-44b1-9d39-560c8eea300f",
+		"name": "SP_PrograIII",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33535219"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "CrearUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "mail",
+									"value": "empleado@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "usuario",
+									"value": "empleado",
+									"type": "text"
+								},
+								{
+									"key": "contrasenia",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "perfil",
+									"value": "empleado",
+									"type": "text"
+								},
+								{
+									"key": "imagen",
+									"type": "file",
+									"src": "/C:/Users/vthourte/Desktop/´/cv/banner.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:666/registro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"registro"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();\r",
+									"\r",
+									"if (responseJson.token) {\r",
+									"    pm.environment.set(\"tokenParcial\", responseJson.token)\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario\": \"vthourte\",\r\n    \"contrasenia\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:666/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AltaProducto",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjAyMTg4NjYsImV4cCI6MTcyMDI3ODg2NiwiYXVkIjoiNTQxZjRiZmUxYzMyNjExYzg0NWEzOTY2ZDk4Nzk1NGFjNTYzNWI0NiIsImRhdGEiOnsibm9tYnJlVXN1YXJpbyI6ImVtcGxlYWRvIiwicGVyZmlsIjoiZW1wbGVhZG8ifSwiYXBwIjoiU2VndW5kb1BhcmNpYWwifQ.11WE62iQT_AVBtNgw14EgA1AvPwY-vCWuBKTOtWUeHo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "tablet1",
+							"type": "text"
+						},
+						{
+							"key": "tipo",
+							"value": "Tablet",
+							"type": "text"
+						},
+						{
+							"key": "marca",
+							"value": "xiaomi",
+							"type": "text"
+						},
+						{
+							"key": "stock",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "50",
+							"type": "text"
+						},
+						{
+							"key": "imagen",
+							"type": "file",
+							"src": "/C:/Users/vthourte/Downloads/xiaomi.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/tienda/alta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"tienda",
+						"alta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProductoExiste",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Telefono 2",
+							"type": "text"
+						},
+						{
+							"key": "tipo",
+							"value": "Smartphone",
+							"type": "text"
+						},
+						{
+							"key": "marca",
+							"value": "Samsung",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "stock",
+							"value": "5",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "precio",
+							"value": "50",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "imagen",
+							"type": "file",
+							"src": "/C:/Users/vthourte/Downloads/xiaomi.jpeg",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/tienda/consultar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"tienda",
+						"consultar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AltaVenta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Telefono 2",
+							"type": "text"
+						},
+						{
+							"key": "tipo",
+							"value": "Smartphone",
+							"type": "text"
+						},
+						{
+							"key": "marca",
+							"value": "Samsung",
+							"type": "text"
+						},
+						{
+							"key": "stock",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "50",
+							"type": "text"
+						},
+						{
+							"key": "imagen",
+							"type": "file",
+							"src": "/C:/Users/vthourte/Downloads/xiaomi.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/tienda/alta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"tienda",
+						"alta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProductosVendidosPorFecha",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/ventas/consultar/productos/vendidos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"ventas",
+						"consultar",
+						"productos",
+						"vendidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VentasPorUsuario",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjAyMTg4MTIsImV4cCI6MTcyMDI3ODgxMiwiYXVkIjoiNTQxZjRiZmUxYzMyNjExYzg0NWEzOTY2ZDk4Nzk1NGFjNTYzNWI0NiIsImRhdGEiOnsibm9tYnJlVXN1YXJpbyI6ImNsaWVudGUiLCJwZXJmaWwiOiJjbGllbnRlIn0sImFwcCI6IlNlZ3VuZG9QYXJjaWFsIn0.B3uWDUhuFsqjI3ibBIXF-OrGwJrQhzxarB-ovrgVA58",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/ventas/consultar/ventas/porUsuario?usuario=valu@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"ventas",
+						"consultar",
+						"ventas",
+						"porUsuario"
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "valu@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DescargarVentasCSV",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/ventas/descargar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"ventas",
+						"descargar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VentasPorTipoProducto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/ventas/consultar/ventas/porProducto?tipoProducto=Tablet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"ventas",
+						"consultar",
+						"ventas",
+						"porProducto"
+					],
+					"query": [
+						{
+							"key": "tipoProducto",
+							"value": "Tablet"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VentasPorRangoPrecios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/ventas/consultar/productos/entreValores?precioDesde=249&precioHasta=250",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"ventas",
+						"consultar",
+						"productos",
+						"entreValores"
+					],
+					"query": [
+						{
+							"key": "precioDesde",
+							"value": "249"
+						},
+						{
+							"key": "precioHasta",
+							"value": "250"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GananciasPorFecha",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/ventas/consultar/ventas/ingresos?fecha=2024-07-03",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"ventas",
+						"consultar",
+						"ventas",
+						"ingresos"
+					],
+					"query": [
+						{
+							"key": "fecha",
+							"value": "2024-07-03"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProductoMasVendido",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/ventas/consultar/productos/masVendido",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"ventas",
+						"consultar",
+						"productos",
+						"masVendido"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ModificarVenta",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\": \"usuarioaasdasdasda@gmail.com\",\r\n    \"nombre\": \"tablet1\",\r\n    \"tipo\": \"Tablet\",\r\n    \"marca\": \"Xiaomi\",\r\n    \"cantidad\": 18,\r\n    \"numeroPedido\": \"6h0sr1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:666/ventas/modificar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"ventas",
+						"modificar"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{tokenParcial}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

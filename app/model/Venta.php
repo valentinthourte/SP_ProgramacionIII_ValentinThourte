@@ -15,6 +15,7 @@ class Venta implements IEntity, JsonSerializable {
     private $precioTotal;
     private $rutaImagen;
 
+
     function __construct()
 	{
 		$params = func_get_args();
@@ -111,6 +112,36 @@ class Venta implements IEntity, JsonSerializable {
 
     public function setId($id) {
         $this->id = $id;
+    }
+
+    public static function obtenerCabecerasCSV() {
+        return [
+            'ID',
+            'Usuario',
+            'Nombre',
+            'Marca',
+            'Tipo',
+            'Cantidad',
+            'Fecha',
+            'Número de Pedido',
+            'Precio Total',
+            'Ruta de Imagen'
+        ];
+    }
+
+    public function toCsv() {
+        return [
+            $this->id,
+            $this->usuario,
+            $this->nombre,
+            $this->marca,
+            $this->tipo,
+            $this->cantidad,
+            $this->fecha,
+            $this->numeroPedido,
+            $this->precioTotal,
+            $this->rutaImagen
+        ];
     }
     
     public function valoresInsert() {

@@ -62,7 +62,13 @@ abstract class AService {
 
     protected function bindearValores($consulta, $valores) {
         foreach($valores as $key=>$value) {
-            $consulta->bindValue($key, $value, PDO::PARAM_STR);
+            try {
+
+                $consulta->bindValue($key, $value, PDO::PARAM_STR);
+            }
+            catch (Exception $ex) {
+                continue;
+            }
         }
         return $consulta;
     }

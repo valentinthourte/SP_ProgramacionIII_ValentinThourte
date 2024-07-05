@@ -143,6 +143,19 @@ class VentaController extends AController {
             return $this->setearResponseError($response, $ex->getMessage(), 404);
         }
     }
+
+    public function descargarVentas($request, $response, $args) {
+        try {
+            $archivo = $this->ventaService->exportarVentasACsv();
+            $contenido = file_get_contents($archivo);
+            unlink($archivo);
+            
+            return $this->setearResponse($response, $contenido, 'text/csv')->withHeader('Content-Disposition', 'attachment; filename="ventas.csv"');
+        }
+        catch (Exception $e) {
+            return $this->setearResponseError($response, $e->getMessage(), 400);
+        }
+    }
     
     
     
